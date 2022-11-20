@@ -35,7 +35,7 @@ export default {
         return {
             newTodo: '',
             newSet: null,
-            preventTime: 1000,
+            preventTime: 500,
             todos: [
                 { id: id++, text: 'Learn HTML', status: true },
                 { id: id++, text: 'Learn JavaScript', status: true },
