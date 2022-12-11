@@ -1,16 +1,16 @@
 <template>
+  <toast-use position="top-right" />
   <img alt="Vue logo" src="./assets/logo.png">
   <TodoList title="TODOS" />
 </template>
 
 <script>
 import TodoList from './components/TodoList.vue';
-
 export default {
   name: 'App',
   components: {
     TodoList
-  }
+  },
 }
 </script>
 

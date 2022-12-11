@@ -1,4 +1,5 @@
 <template>
+
     <div class="d-flex flex-column align-items-center justify-content-center">
         <div>
             <h1 class="title">
@@ -9,7 +10,8 @@
             <input @keyup="onInput" placeholder="Write and wait...">
         </form>
         <ul>
-            <li class="d-flex justify-content-between align-items-center" v-for="todo in todos" :key="todo.id">
+            <li class="d-flex justify-content-between align-items-center" v-for="todo in todos" :key="todo.id"
+                :id="`todo-item_${todo.id}`">
                 <span :class="{ 'text-decoration-overline': !todo.status }">{{ todo.text }}</span>
                 <div class="d-flex">
                     <button class="btn  mx-10" :class="{ 'btn-check': todo.status, 'btn-cancel': todo.status == false }"
@@ -24,6 +26,7 @@
             </li>
         </ul>
     </div>
+
 </template>
 
 <script>
@@ -64,7 +67,8 @@ export default {
                 status: true
             }
             this.todos.push(this.newTodo)
-            this.newTodo = ''
+            this.newTodo = '';
+            this.openToast("success", "Başarılı", "Başarılı olarak eklendi")
         },
         todoFinish(todo) {
             this.todos = this.todos.map((v) => {
@@ -79,6 +83,10 @@ export default {
             this.todos = this.todos.filter((v) => {
                 return todo != v.id;
             })
+            this.openToast("success", "Başarılı", "Başarılı olarak silindi")
+        },
+        openToast(severity, summary, detail, time = 2000) {
+            return this.$toast.add({ severity: severity, summary: summary, detail: detail, life: time });
         }
     }
 }
@@ -104,7 +112,7 @@ input:focus-visible {
 input::placeholder {
     font-weight: 600;
     font-size: 14px;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     color: #6c816b;
 }
 
