@@ -6,25 +6,29 @@
                 {{ title }}
             </h1>
         </div>
-        <form>
-            <input @keyup="onInput" placeholder="Write and wait...">
-        </form>
-        <ul>
-            <li class="d-flex justify-content-between align-items-center" v-for="todo in todos" :key="todo.id"
-                :id="`todo-item_${todo.id}`">
-                <span :class="{ 'text-decoration-overline': !todo.status }">{{ todo.text }}</span>
-                <div class="d-flex">
-                    <button class="btn  mx-10" :class="{ 'btn-check': todo.status, 'btn-cancel': todo.status == false }"
-                        @click="todoFinish(todo.id)">
-                        <font-awesome-icon v-if="todo.status" icon="fa-solid fa-check" />
-                        <font-awesome-icon v-else icon="fa-solid fa-ban" />
-                    </button>
-                    <button class="btn btn-delete" @click="removeTodo(todo.id)">
-                        <font-awesome-icon icon="fa-solid fa-trash" />
-                    </button>
-                </div>
-            </li>
-        </ul>
+        <div class="glass-show">
+            <form>
+                <input @keyup="onInput" placeholder="Write and wait...">
+            </form>
+            <ul>
+                <li class="d-flex justify-content-between align-items-center" v-for="todo in todos" :key="todo.id"
+                    :id="`todo-item_${todo.id}`">
+                    <span :class="{ 'text-decoration-overline': !todo.status }">{{ todo.text }}</span>
+                    <div class="d-flex">
+                        <button class="btn  mx-10"
+                            :class="{ 'btn-check': todo.status, 'btn-cancel': todo.status == false }"
+                            @click="todoFinish(todo.id)">
+                            <font-awesome-icon v-if="todo.status" icon="fa-solid fa-check" />
+                            <font-awesome-icon v-else icon="fa-solid fa-ban" />
+                        </button>
+                        <button class="btn btn-delete" @click="removeTodo(todo.id)">
+                            <font-awesome-icon icon="fa-solid fa-trash" />
+                        </button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
         <div>
             <message-use severity="success" :closable="false">Tamamlanan Sayısı {{ finishedCount }}</message-use>
             <message-use severity="error" :closable="false">Tamamlanmayan Sayısı {{ unFinishedCount }}</message-use>
@@ -45,7 +49,7 @@ export default {
         return {
             newTodo: '',
             newSet: null,
-            preventTime: 500,
+            preventTime: 1500,
             todos: [
                 { id: id++, text: 'Learn HTML', status: true },
                 { id: id++, text: 'Learn Css', status: true },
@@ -112,24 +116,31 @@ export default {
 
 <style scoped>
 input {
-    padding: 10px;
-    border: 2px solid #CFB997;
-    width: 250px;
+    width: 100%;
+    border: none;
     border-radius: 4px;
-    font-size: 14px;
-    font-weight: 600;
+    margin: 8px 0;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+    transition: .3s;
+    font-family: 'Open Sans', sans-serif !important;
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: 400;
+    padding: 15px;
+    background-color: rgba(0,0,0,0.2);
+    color: white;
 }
 
-input:focus-visible {
-    border-color: #9BA17B !important;
-    outline: none;
+input:focus {
+    border-color: #41b883;
+    box-shadow: 0 0 3px 0 #41b883;
+    background-color: rgba(0,0,0,0.5);
 }
 
 input::placeholder {
-    font-weight: 600;
     font-size: 14px;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #6c816b;
+    color: white;
 }
 
 ul {
@@ -140,8 +151,9 @@ ul {
 li {
     list-style: none;
     margin-bottom: 10px;
-    color: #557153;
-    font-weight: bold;
+    color: white;
+    font-weight: 400;
+
 }
 
 .btn {
@@ -188,6 +200,26 @@ li {
 }
 
 .title {
-    color: #557153;
+    padding: 10px 16px;
+    background: rgba(65, 184, 131, 0.5);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgb(0 0 0 / 10%);
+    backdrop-filter: blur(4.5px);
+    -webkit-backdrop-filter: blur(4.5px);
+    border: 1px solid rgba(65, 184, 131, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.glass-show {
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 </style>
