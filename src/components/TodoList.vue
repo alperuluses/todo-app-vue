@@ -25,6 +25,11 @@
                 </div>
             </li>
         </ul>
+        <div>
+            <message-use severity="success" :closable="false">Tamamlanan Sayısı {{ finishedCount }}</message-use>
+            <message-use severity="error" :closable="false">Tamamlanmayan Sayısı {{ unFinishedCount }}</message-use>
+        </div>
+
     </div>
 
 </template>
@@ -43,7 +48,10 @@ export default {
             preventTime: 500,
             todos: [
                 { id: id++, text: 'Learn HTML', status: true },
+                { id: id++, text: 'Learn Css', status: true },
                 { id: id++, text: 'Learn JavaScript', status: true },
+                { id: id++, text: 'Learn Php', status: false },
+                { id: id++, text: 'Learn Git', status: true },
                 { id: id++, text: 'Learn Vue', status: true }
             ]
 
@@ -87,6 +95,14 @@ export default {
         },
         openToast(severity, summary, detail, time = 2000) {
             return this.$toast.add({ severity: severity, summary: summary, detail: detail, life: time });
+        }
+    },
+    computed: {
+        finishedCount() {
+            return this.todos.filter((t) => t.status == false).length;
+        },
+        unFinishedCount() {
+            return this.todos.filter((t) => t.status == true).length;
         }
     }
 }

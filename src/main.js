@@ -20,7 +20,6 @@ const app = createApp(App);
 app.component("font-awesome-icon", FontAwesomeIcon);
 app.component("message-use", Message);
 app.component("toast-use", Toast);
-
 app.use(PrimeVue);
 app.use(ToastService);
 app.mount("#app");
