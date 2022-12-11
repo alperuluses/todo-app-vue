@@ -6,14 +6,16 @@
             </h1>
         </div>
         <form>
-            <input @keyup="onInput">
+            <input @keyup="onInput" placeholder="Write and wait...">
         </form>
         <ul>
             <li class="d-flex justify-content-between align-items-center" v-for="todo in todos" :key="todo.id">
                 <span :class="{ 'text-decoration-overline': !todo.status }">{{ todo.text }}</span>
                 <div class="d-flex">
-                    <button class="btn btn-check mx-10" @click="todoFinish(todo.id)">
-                        <font-awesome-icon icon="fa-solid fa-check" />
+                    <button class="btn  mx-10" :class="{ 'btn-check': todo.status, 'btn-cancel': todo.status == false }"
+                        @click="todoFinish(todo.id)">
+                        <font-awesome-icon v-if="todo.status" icon="fa-solid fa-check" />
+                        <font-awesome-icon v-else icon="fa-solid fa-ban" />
                     </button>
                     <button class="btn btn-delete" @click="removeTodo(todo.id)">
                         <font-awesome-icon icon="fa-solid fa-trash" />
@@ -67,7 +69,7 @@ export default {
         todoFinish(todo) {
             this.todos = this.todos.map((v) => {
                 if (v.id === todo) {
-                    return { ...v, status: false };
+                    return { ...v, status: !v.status };
                 } else {
                     return { ...v }
                 }
@@ -88,13 +90,22 @@ export default {
 input {
     padding: 10px;
     border: 2px solid #CFB997;
-    width: 200px;
+    width: 250px;
     border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 input:focus-visible {
     border-color: #9BA17B !important;
     outline: none;
+}
+
+input::placeholder {
+    font-weight: 600;
+    font-size: 14px;
+    font-family:Arial, Helvetica, sans-serif;
+    color: #6c816b;
 }
 
 ul {
@@ -130,6 +141,18 @@ li {
 
 .btn-check {
     background-color: #5F8D4E;
+    color: White;
+    display: flex;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+.btn-cancel {
+    background-color: #e22e2e;
     color: White;
     display: flex;
     width: 30px;

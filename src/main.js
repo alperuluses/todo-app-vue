@@ -7,8 +7,9 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faBan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faPhone, faCheck, faTrash);
+library.add(faPhone, faCheck, faTrash, faBan);
 
 createApp(App).component("font-awesome-icon", FontAwesomeIcon).mount("#app");
